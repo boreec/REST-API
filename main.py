@@ -1,5 +1,7 @@
+import database
+
 def main():
-    print("hello_world")
+    database.create()
 
 if __name__ == "__main__":
     main()
