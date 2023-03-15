@@ -24,10 +24,14 @@ def get_people():
            
     return Response(json.dumps(rows_json), mimetype='application/json')
 
+@app.route("/people/<id>", methods=['GET'])
+def get_people_by_id(id):
+    answer = db.select_person_by_id(id)
 
-
-
-
+    if len(answer) != 1 :
+        flask.abort(404)
+    else :
+        return Response(json.dumps(answer), mimetype='application/json')
 
 if __name__ == "__main__":
     app.run()

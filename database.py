@@ -52,6 +52,13 @@ class PeopleDatabase():
         rows = cursor.fetchall()
 
         return rows
+
+    def select_person_by_id(self, id):
+        cursor = self.db_connection.cursor()
+        cursor.execute("SELECT * FROM persons WHERE id = ?", (id,))
+        rows = cursor.fetchall()
+
+        return rows
     
 def create_db_connection():
     db_connection = None
