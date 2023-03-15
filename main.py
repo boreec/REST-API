@@ -9,6 +9,9 @@ db = PeopleDatabase()
 
 @app.route("/people", methods=['GET'])
 def get_people():
+    """
+        Return a 200 response that contains all people in the system. 
+    """
     rows = db.select_all_persons()
     rows_json = []
     for row in rows:
@@ -26,6 +29,10 @@ def get_people():
 
 @app.route("/people/<id>", methods=['GET'])
 def get_people_by_id(id):
+    """
+        Return a 200 response containing the person with the provided
+        id, or a 404 response if that person is not in the system.
+    """
     answer = db.select_person_by_id(id)
 
     if len(answer) != 1 :
