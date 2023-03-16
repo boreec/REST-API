@@ -66,7 +66,7 @@ class PeopleDatabase():
         self.create_person(p3)
         self.create_person(p4)
 
-    def select_all_persons(self) -> [OrderedDict]:
+    def select_all_persons(self) -> [Person]:
         """
             Return the entire 'persons' table as a
             list of fields. 
@@ -77,14 +77,8 @@ class PeopleDatabase():
 
         persons = []
         for row in rows:
-            # preserve the order of data for the json file
-            od = OrderedDict()
-            od['id'] = row[0]
-            od['firstName'] = row[1]
-            od['lastName'] = row[2]
-            od['email'] = row[3]
-            od['birthday'] = row[4]
-            persons.append(od)
+            p = Person(row[0], row[1], row[2], row[3], row[4])
+            persons.append(p)
             
         return persons
 
