@@ -82,26 +82,16 @@ class PeopleDatabase():
             
         return persons
 
-    def select_person_by_id(self, id) -> OrderedDict:
+    def select_person_by_id(self, id) -> Person:
         """
             Return a person from the table corresponding to
             a provided id.  
         """
         cursor = self.db_connection.cursor()
         cursor.execute("SELECT * FROM persons WHERE id = ?", (id,))
-        rows = cursor.fetchall()
-
-        if len(rows) != 1 :
-            return None
-        
-        od = OrderedDict()
-        od['id'] = rows[0][0]
-        od['firstName'] = rows[0][1]
-        od['lastName'] = rows[0][2]
-        od['email'] = rows[0][3]
-        od['birthday'] = rows[0][4]
-        
-        return od
+        row = cursor.fetchone()
+       
+        return Person(row[0],row[1],row[2],row[3],row[4])
 
     def select_person_by_email(self, email) -> OrderedDict:
         """
