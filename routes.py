@@ -1,6 +1,5 @@
 from datetime import date
 from flask import Response, abort, jsonify, request
-from utils import *
 from __main__ import app, db
 from Person import Person
 
@@ -54,27 +53,37 @@ def get_person_age(id):
 @app.route("/people", methods=['POST'])
 def create_person():
 
-    error_message = verify_data(
-        request.json.get("id"),
-        request.json.get("firstName"),
-        request.json.get("lastName"),
-        request.json.get("email"),
-        request.json.get("birthday")
+    person = Person(
+        request.json['id'],
+        request.json['firstName'],
+        request.json['lastName'],
+        request.json['email'],
+        request.json['birthday']
     )
+    
+    error_message = person.verify_data()
 
     if len(error_message) > 0:
         return Response(error_message, 400)
 
+    if db.select_person_by_id(person['id']) != None :
+        return Response("Person with similar id already exist in database.", 400)
+    if db.select_person_by_email(person['email']) != None :
+        return Response("Person with similar email already exist in database.", 400)
+    
     try:
-        inserted_person = Person(
-            request.json.get("id"),
-            request.json.get("firstName"),
-            request.json.get("lastName"),
-            request.json.get("email"),
-            request.json.get("birthday")
-        )
-        db.create_person(inserted_person)
-        retrieved_person = db.select_person_by_id(request.json.get("id"))
-        return Response((json.dumps(retrieved_person), '\n'), status=200, mimetype='application/json')
+        db.create_person(person)
+        return Response((json.dumps(person), '\n'), status=200, mimetype='application/json')
     except Exception as e:
         return Response('Failed inserting verified data into database: {}\n'.format(e), status=500)
+
+@app.route("/people/<id>", methods=['PUT'])
+def update_person(id):
+    
+    person = db.select_person_by_id(id)
+
+    if answer == None :
+        abort(404)
+    else :
+        return Response((json.dumps(answer),'\n'), mimetype='application/json')
+    
