@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from database import PeopleDatabase
-from flask import Flask, Response
+from flask import Flask, Response, abort, jsonify
+from datetime import date
 
 import json
 
@@ -28,7 +29,7 @@ def get_people():
     return Response(json.dumps(rows_json), mimetype='application/json')
 
 @app.route("/people/<id>", methods=['GET'])
-def get_people_by_id(id):
+def get_person_by_id(id):
     """
         Return a 200 response containing the person with the provided
         id, or a 404 response if that person is not in the system.
@@ -36,9 +37,24 @@ def get_people_by_id(id):
     answer = db.select_person_by_id(id)
 
     if len(answer) != 1 :
-        flask.abort(404)
+        abort(404)
     else :
         return Response(json.dumps(answer), mimetype='application/json')
+
+@app.route("/people/<id>/age", methods=['GET'])
+def get_person_age(id):
+    answer = db.select_person_by_id(id)
+
+    if len(answer) != 1 :
+        abort(404)
+    else :
+        born_year = int(answer[0][4][:4])
+        born_month = int(answer[0][4][5:7])
+        born_day = int(answer[0][4][-2:])
+
+        today = date.today()
+        age = today.year - born_year - ((today.month, today.day) < (born_month, born_day))
+        return jsonify(age)
 
 if __name__ == "__main__":
     app.run()
