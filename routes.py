@@ -1,5 +1,6 @@
 from datetime import date
 from flask import Response, abort, jsonify, request
+from utils import *
 from __main__ import app, db
 
 import json
@@ -57,19 +58,43 @@ def create_person():
     email = request.json.get("email")
     birthday = request.json.get("birthday")
 
-    error_msg = ""
-    if id == None :
-        error_msg += "Missing 'id' field.\n"
-    if firstName == None :
-        error_msg += "Missing 'firstName' field.\n"
-    if lastName == None :
-        error_msg += "Missing 'lastName' field.\n"
-    if birthday == None :
-        error_msg += "Missing 'birthday' field.\n"
-    if email == None:
-        error_msg += "Missing 'email' field.\n"
+    error_message = ""
 
-    if len(error_msg) > 0:
-        return Response(error_msg, 400)
-    
-    return ""
+    try:
+        verify_id(id)
+    except Exception as e:
+        error_message += e.__str__() + "\n"
+
+    try:
+        verify_name(firstName)
+    except Exception as e:
+        error_message += e.__str__() + "\n"
+
+    try:
+        verify_name(lastName)
+    except Exception as e:
+        error_message += e.__str__() + "\n"
+        
+    try:
+        verify_email(email)
+    except Exception as e:
+        error_message += e.__str__() + "\n"
+
+    try: 
+        verify_birthday(birthday)
+    except Exception as e:
+        error_message += e.__str__() + "\n"
+
+    similar_email = db.select_person_by_email(email)
+    if similar_email != None:
+        error_message = "Invalid email: '{}' already exists in the database.\n".format(email)   
+    if len(error_message) > 0:
+        return Response(error_message, 400)
+
+    try:
+        inserted_person = (id, firstName, lastName, email, birthday)
+        db.create_person(inserted_person)
+        retrieved_person = db.select_person_by_id(id)
+        return Response((json.dumps(retrieved_person), '\n'), status=200, mimetype='application/json')
+    except Exception as e:
+        return Response('Failed inserting verified data into database: {}\n'.format(e), status=500)
