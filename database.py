@@ -1,5 +1,6 @@
 import sqlite3
 from sqlite3 import Error
+from collections import OrderedDict
 
 class PeopleDatabase():
     """
@@ -64,7 +65,7 @@ class PeopleDatabase():
         self.create_person(p3)
         self.create_person(p4)
 
-    def select_all_persons(self):
+    def select_all_persons(self) -> [OrderedDict]:
         """
             Return the entire 'persons' table as a
             list of fields. 
@@ -73,9 +74,20 @@ class PeopleDatabase():
         cursor.execute("SELECT * FROM persons;")
         rows = cursor.fetchall()
 
-        return rows
+        persons = []
+        for row in rows:
+            # preserve the order of data for the json file
+            od = OrderedDict()
+            od['id'] = row[0]
+            od['firstName'] = row[1]
+            od['lastName'] = row[2]
+            od['email'] = row[3]
+            od['birthday'] = row[4]
+            persons.append(od)
+            
+        return persons
 
-    def select_person_by_id(self, id):
+    def select_person_by_id(self, id) -> OrderedDict:
         """
             Return a person from the table corresponding to
             a provided id.  
@@ -84,7 +96,17 @@ class PeopleDatabase():
         cursor.execute("SELECT * FROM persons WHERE id = ?", (id,))
         rows = cursor.fetchall()
 
-        return rows
+        if len(rows) != 1 :
+            return None
+        
+        od = OrderedDict()
+        od['id'] = rows[0][0]
+        od['firstName'] = rows[0][1]
+        od['lastName'] = rows[0][2]
+        od['email'] = rows[0][3]
+        od['birthday'] = rows[0][4]
+        
+        return od
     
 def create_db_connection():
     """
