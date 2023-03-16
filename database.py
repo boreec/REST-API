@@ -104,20 +104,14 @@ class PeopleDatabase():
 
         return None if row == None else Person(row[0],row[1],row[2],row[3],row[4])
     
-    def select_persons_by_name(self, name) -> [OrderedDict]:
+    def select_persons_by_name(self, name) -> [Person]:
         cursor = self.db_connection.cursor()
         cursor.execute("SELECT * FROM persons WHERE firstName LIKE ?;", (name+'%',))
         rows = cursor.fetchall()
         persons = []
         for row in rows:
-            # preserve the order of data for the json file
-            od = OrderedDict()
-            od['id'] = row[0]
-            od['firstName'] = row[1]
-            od['lastName'] = row[2]
-            od['email'] = row[3]
-            od['birthday'] = row[4]
-            persons.append(od)
+            p = Person(row[0],row[1],row[2],row[3],row[4])
+            persons.append(p)
             
         return persons
 
