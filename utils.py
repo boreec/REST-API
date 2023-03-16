@@ -1,3 +1,4 @@
+from datetime import datetime, date
 import re
 
 uuid_regex = re.compile('^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}\Z', re.I)
@@ -26,4 +27,19 @@ def verify_email(address: str):
     if len(address) == 0:
         raise Exception("Invalid email address: empty.")
     if not re.fullmatch(email_regex, address):
-        raise Exception("Invalid email address: not compliant with email address format.")  
+        raise Exception("Invalid email address: not compliant with email address format.")
+
+def verify_birthday(birthday: str):
+    if birthday == None:
+        raise Exception("Birthday is missing.")
+    try: 
+        birthday_date = datetime.strptime(birthday, '%Y-%m-%d').date()
+    except Exception as e:
+        raise Exception("Invalid birthday: Bad format. Try YYYY-MM-DD.")
+
+    approximate_age = date.today().year - birthday_date.year
+
+    if approximate_age > 150:
+        raise Exception("Invalid birthday: {} years old is humanly too old.".format(approximate_age))
+    if date.today() < birthday_date :
+        raise Exception("Invalid birthday: You can not be born in the future.")
