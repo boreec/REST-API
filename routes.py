@@ -10,7 +10,7 @@ def get_people():
         Return a 200 response that contains all people in the system. 
     """
     persons = db.select_all_persons()
-    return Response(json.dumps(persons), mimetype='application/json')
+    return Response((json.dumps(persons), '\n'), mimetype='application/json')
 
 @app.route("/people/<id>", methods=['GET'])
 def get_person_by_id(id):
@@ -23,7 +23,7 @@ def get_person_by_id(id):
     if answer == None :
         abort(404)
     else :
-        return Response(json.dumps(answer), mimetype='application/json')
+        return Response((json.dumps(answer),'\n'), mimetype='application/json')
 
 @app.route("/people/<id>/age", methods=['GET'])
 def get_person_age(id):
