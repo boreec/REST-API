@@ -1,5 +1,5 @@
 from datetime import date
-from flask import Response, abort, jsonify
+from flask import Response, abort, jsonify, request
 from __main__ import app, db
 
 import json
@@ -9,9 +9,15 @@ def get_people():
     """
         Return a 200 response that contains all people in the system. 
     """
-    persons = db.select_all_persons()
+    args = request.args
+    name = args.get('name')
+    persons = []
+    if name == None:
+        persons = db.select_all_persons()
+    else:
+        persons = db.select_persons_by_name(name)
     return Response((json.dumps(persons), '\n'), mimetype='application/json')
-
+    
 @app.route("/people/<id>", methods=['GET'])
 def get_person_by_id(id):
     """
@@ -42,3 +48,4 @@ def get_person_age(id):
         today = date.today()
         age = today.year - born_year - ((today.month, today.day) < (born_month, born_day))
         return jsonify(age)
+

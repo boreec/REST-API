@@ -107,7 +107,25 @@ class PeopleDatabase():
         od['birthday'] = rows[0][4]
         
         return od
-    
+
+    def select_persons_by_name(self, name) -> [OrderedDict]:
+        cursor = self.db_connection.cursor()
+        cursor.execute("SELECT * FROM persons WHERE firstName LIKE ?;", (name+'%',))
+        rows = cursor.fetchall()
+        persons = []
+        for row in rows:
+            # preserve the order of data for the json file
+            od = OrderedDict()
+            od['id'] = row[0]
+            od['firstName'] = row[1]
+            od['lastName'] = row[2]
+            od['email'] = row[3]
+            od['birthday'] = row[4]
+            persons.append(od)
+            
+        return persons
+
+           
 def create_db_connection():
     """
         Create a database connection to a in-memory database. 
