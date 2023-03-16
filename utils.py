@@ -1,4 +1,5 @@
 from datetime import datetime, date
+from __main__ import db
 import re
 
 uuid_regex = re.compile('^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}\Z', re.I)
@@ -43,3 +44,37 @@ def verify_birthday(birthday: str):
         raise Exception("Invalid birthday: {} years old is humanly too old.".format(approximate_age))
     if date.today() < birthday_date :
         raise Exception("Invalid birthday: You can not be born in the future.")
+
+def verify_data(id, firstName, lastName, email, birthday) -> str:
+    error_message = ""
+
+    try:
+        verify_id(id)
+    except Exception as e:
+        error_message += e.__str__() + "\n"
+
+    try:
+        verify_name(firstName)
+    except Exception as e:
+        error_message += e.__str__() + "\n"
+
+    try:
+        verify_name(lastName)
+    except Exception as e:
+        error_message += e.__str__() + "\n"
+        
+    try:
+        verify_email(email)
+    except Exception as e:
+        error_message += e.__str__() + "\n"
+
+    try: 
+        verify_birthday(birthday)
+    except Exception as e:
+        error_message += e.__str__() + "\n"
+
+    similar_email = db.select_person_by_email(email)
+    if similar_email != None:
+        error_message += "Invalid email: '{}' already exists in the database.\n".format(email)   
+
+    return error_message
