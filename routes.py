@@ -27,6 +27,10 @@ def get_person_by_id(id):
 
 @app.route("/people/<id>/age", methods=['GET'])
 def get_person_age(id):
+    """
+        Identify a person by a provided it, calculate and return a 200 of its age.
+        A 404 response is returned if that person is not in the system.
+    """
     answer = db.select_person_by_id(id)
 
     if answer == None:
