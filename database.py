@@ -93,26 +93,16 @@ class PeopleDatabase():
         
         return None if row == None else Person(row[0],row[1],row[2],row[3],row[4])
 
-    def select_person_by_email(self, email) -> OrderedDict:
+    def select_person_by_email(self, email) -> Person:
         """
             Return a person from the table corresponding to
             a provided id.  
         """
         cursor = self.db_connection.cursor()
         cursor.execute("SELECT * FROM persons WHERE email = ?", (email,))
-        rows = cursor.fetchall()
+        row = cursor.fetchone()
 
-        if len(rows) != 1 :
-            return None
-        
-        od = OrderedDict()
-        od['id'] = rows[0][0]
-        od['firstName'] = rows[0][1]
-        od['lastName'] = rows[0][2]
-        od['email'] = rows[0][3]
-        od['birthday'] = rows[0][4]
-        
-        return od
+        return None if row == None else Person(row[0],row[1],row[2],row[3],row[4])
     
     def select_persons_by_name(self, name) -> [OrderedDict]:
         cursor = self.db_connection.cursor()
