@@ -6,4 +6,6 @@ class Person():
         self.lastName = lastName
         self.email = email
         self.birthday = birthday
-    
+
+    def to_tuple(self) -> tuple:
+        return (self.id, self.firstName, self.lastName, self.email, self.birthday)     

@@ -1,3 +1,4 @@
+from Person import Person
 import sqlite3
 from sqlite3 import Error
 from collections import OrderedDict
@@ -37,7 +38,7 @@ class PeopleDatabase():
         except Error as e:
             print(e)
     
-    def create_person(self, person):
+    def create_person(self, person: Person):
         """
             Insert a person information inside the 'persons' table. 
         """
@@ -48,7 +49,7 @@ class PeopleDatabase():
         """
 
         cursor = self.db_connection.cursor()
-        cursor.execute(sql_statement, person)
+        cursor.execute(sql_statement, person.to_tuple())
         self.db_connection.commit()
 
     def create_persons(self):
@@ -56,10 +57,10 @@ class PeopleDatabase():
             Define various different persons and insert them inside the
             'persons' table via create_person(). 
         """
-        p1 = ('bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de','John','Doe','johndoe@example.com','1997-01-01')
-        p2 = ('d5356358-b39f-4c6e-9690-2c965a607702','Jane','Doe','janedoe@example.com','1991-07-28')
-        p3 = ('cb2bfa60-e2ae-46ec-ad77-60cf7e8979fd','Brian','Smith','briansmith@example.com','2000-05-10') 
-        p4 = ('d82fc695-5ac2-4fed-9387-a7d9c0fb0c4f','Ashley','Yu','ashleyyu@example.com','2003-12-24')
+        p1 = Person('bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de','John','Doe','johndoe@example.com','1997-01-01')
+        p2 = Person('d5356358-b39f-4c6e-9690-2c965a607702','Jane','Doe','janedoe@example.com','1991-07-28')
+        p3 = Person('cb2bfa60-e2ae-46ec-ad77-60cf7e8979fd','Brian','Smith','briansmith@example.com','2000-05-10') 
+        p4 = Person('d82fc695-5ac2-4fed-9387-a7d9c0fb0c4f','Ashley','Yu','ashleyyu@example.com','2003-12-24')
         self.create_person(p1)
         self.create_person(p2)
         self.create_person(p3)

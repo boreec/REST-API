@@ -2,6 +2,7 @@ from datetime import date
 from flask import Response, abort, jsonify, request
 from utils import *
 from __main__ import app, db
+from Person import Person
 
 import json
 
@@ -65,7 +66,7 @@ def create_person():
         return Response(error_message, 400)
 
     try:
-        inserted_person = (
+        inserted_person = Person(
             request.json.get("id"),
             request.json.get("firstName"),
             request.json.get("lastName"),
