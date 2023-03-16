@@ -49,3 +49,27 @@ def get_person_age(id):
         age = today.year - born_year - ((today.month, today.day) < (born_month, born_day))
         return jsonify(age)
 
+@app.route("/people", methods=['POST'])
+def create_person():
+    id = request.json.get("id")
+    firstName = request.json.get("firstName")
+    lastName = request.json.get("lastName")
+    email = request.json.get("email")
+    birthday = request.json.get("birthday")
+
+    error_msg = ""
+    if id == None :
+        error_msg += "Missing 'id' field.\n"
+    if firstName == None :
+        error_msg += "Missing 'firstName' field.\n"
+    if lastName == None :
+        error_msg += "Missing 'lastName' field.\n"
+    if birthday == None :
+        error_msg += "Missing 'birthday' field.\n"
+    if email == None:
+        error_msg += "Missing 'email' field.\n"
+
+    if len(error_msg) > 0:
+        return Response(error_msg, 400)
+    
+    return ""
