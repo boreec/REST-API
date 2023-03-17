@@ -1,6 +1,6 @@
 from datetime import date
 from flask import Response, abort, jsonify, request
-from __main__ import app, db
+from app import app, db
 from Person import Person
 
 import json
