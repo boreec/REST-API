@@ -1,4 +1,4 @@
-from database import PeopleDatabase
+from PeopleDatabase import PeopleDatabase
 from flask import Flask
 
 app = Flask(__name__)
