@@ -28,6 +28,7 @@ class TestPeopleDatabase(unittest.TestCase):
         person = self.db.select_person_by_id("bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de")
 
         self.assertTrue(isinstance(person, Person))
+        self.assertEqual("bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de", person['id'])
 
 if __name__ == '__main__':
     unittest.main()
