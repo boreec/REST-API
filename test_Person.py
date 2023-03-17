@@ -54,5 +54,12 @@ class TestPerson(unittest.TestCase):
         self.assertRaises(Exception, Person("","","","test@test@.com","").verify_email)
         self.assertRaises(Exception, Person("","","","@:@:gmail.com","").verify_email)
 
+    def test_verify_email_good_format(self):
+        try:
+            Person('','','', 'johndoe@example.com','').verify_email()
+            Person('','','', 'a@b.cd','').verify_email()
+        except Exception as e:
+            self.fail("Person.verify_email() raised exception for good name format")
+            
 if __name__ == '__main__':
     unittest.main()
