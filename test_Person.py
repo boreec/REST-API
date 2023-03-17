@@ -31,5 +31,11 @@ class TestPerson(unittest.TestCase):
         self.assertRaises(Exception, Person("", "", "", "", "").verify_firstName)
         self.assertRaises(Exception, Person("", "!nv@lidN@m3", "", "", "").verify_firstName)
 
+    def test_verify_firstName_good_format(self):
+        try:
+            Person('','John','','','').verify_firstName()
+        except Exception:
+            self.fail("Person.verify_firstName() raised Exception for good name format.")
+            
 if __name__ == '__main__':
     unittest.main()
