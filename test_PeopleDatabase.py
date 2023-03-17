@@ -75,6 +75,14 @@ class TestPeopleDatabase(unittest.TestCase):
         persons_after_delete = self.db.select_all_persons()
         
         self.assertEqual(persons_before_delete, persons_after_delete)
-                
+
+    def test_delete_person_with_known_person(self):
+        person = self.db.select_person_by_id("bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de")
+        self.assertNotEqual(None, person)
+        self.db.delete_person(person)
+        person = self.db.select_person_by_id("bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de")
+        self.assertEqual(None, person)
+        
+        
 if __name__ == '__main__':
     unittest.main()
