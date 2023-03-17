@@ -8,7 +8,7 @@ information in memory.
 ### Run the server
 
 ```terminal
-(user) $ python3 main.py
+python3 main.py
 ````
 
 ### Call the API
@@ -26,5 +26,5 @@ To make sure the API works in the way intended, many unit tests were written.
 In order to execute unit tests, run the following command.
 
 ```terminal
-(user) $ ~ python3 -m unittest
+python3 -m unittest
 ```
