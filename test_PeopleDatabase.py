@@ -49,6 +49,10 @@ class TestPeopleDatabase(unittest.TestCase):
         self.assertEqual(2, len(persons))
         self.assertTrue(persons[0]['firstName'] == 'John' or persons[0]['firstName'] == 'Jane')
         self.assertTrue(persons[1]['firstName'] == 'John' or persons[1]['firstName'] == 'Jane')
-        
+
+    def test_update_person_with_unknown_person(self):
+        p = Person('???','???','???','???','???')
+        self.assertEqual(None, self.db.update_person(p))
+               
 if __name__ == '__main__':
     unittest.main()
