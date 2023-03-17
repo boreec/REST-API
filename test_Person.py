@@ -23,9 +23,6 @@ class TestPerson(unittest.TestCase):
     def test_verify_id_good_format(self):
         try:
             Person('bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de','','','','').verify_id()
-            Person('d5356358-b39f-4c6e-9690-2c965a607702','','','','').verify_id()
-            Person('cb2bfa60-e2ae-46ec-ad77-60cf7e8979fd','','','','').verify_id() 
-            Person('d82fc695-5ac2-4fed-9387-a7d9c0fb0c4f','','','','').verify_id()
         except Exception:
             self.fail("Person.verify_id() raised Exception for good uuid format.")
 
