@@ -48,5 +48,11 @@ class TestPerson(unittest.TestCase):
         except Exception:
             self.fail("Person.verify_lastName() raised Exception for good name format.")
 
+    def test_verify_email_raises_exception(self):
+        self.assertRaises(Exception, Person("","","",None,"").verify_email)
+        self.assertRaises(Exception, Person("","","","","").verify_email)
+        self.assertRaises(Exception, Person("","","","test@test@.com","").verify_email)
+        self.assertRaises(Exception, Person("","","","@:@:gmail.com","").verify_email)
+
 if __name__ == '__main__':
     unittest.main()
