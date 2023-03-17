@@ -104,3 +104,14 @@ def update_person(id):
 
     db.update_person(person)
     return Response((json.dumps(person), '\n'), status=200, mimetype='application/json')
+
+@app.route("/people/<id>", methods=['DELETE'])
+def delete_person(id):
+    person = db.select_person_by_id(id)
+
+    if person == None :
+        abort(404)
+
+    db.delete_person(person)
+
+    return Response((json.dumps(person), "\n"), status=200, mimetype='application/json')
