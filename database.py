@@ -127,7 +127,12 @@ class PeopleDatabase():
         cursor = self.db_connection.cursor()
         cursor.execute(sql_statement, (person['firstName'],person['lastName'],person['email'],person['birthday'], person['id']))
         self.db_connection.commit()
-           
+
+    def delete_person(self, person: Person):
+        cursor = self.db_connection.cursor()
+        cursor.execute("DELETE FROM persons WHERE id = ?;", (person['id'],))
+        self.db_connection.commit()
+        
 def create_db_connection():
     """
         Create a database connection to a in-memory database. 
