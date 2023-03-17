@@ -115,6 +115,18 @@ class PeopleDatabase():
             
         return persons
 
+    def update_person(self, person: Person):
+        sql_statement = """
+                UPDATE persons
+                SET firstname = ?,
+                    lastname = ?,
+                    email = ?,
+                    birthday = ?
+                WHERE id = ?;
+            """
+        cursor = self.db_connection.cursor()
+        cursor.execute(sql_statement, (person['firstName'],person['lastName'],person['email'],person['birthday'], person['id']))
+        self.db_connection.commit()
            
 def create_db_connection():
     """
