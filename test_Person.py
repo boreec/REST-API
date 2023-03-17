@@ -70,5 +70,12 @@ class TestPerson(unittest.TestCase):
         self.assertRaises(Exception, Person("","","","","1998-13-01").verify_birthday)
         self.assertRaises(Exception, Person("","","","","1998-02-31").verify_birthday)
 
+    def test_verify_birthday_good_format(self):
+        try:
+            Person('','','','','1998-12-01').verify_birthday()
+            Person('','','','','1998-02-28').verify_birthday()
+        except Exception:
+            self.fail("Person.verify_birthday() raised exception for good birthday format.")
+
 if __name__ == '__main__':
     unittest.main()
