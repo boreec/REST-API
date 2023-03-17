@@ -28,6 +28,11 @@ class TestPerson(unittest.TestCase):
             Person('d82fc695-5ac2-4fed-9387-a7d9c0fb0c4f','','','','').verify_id()
         except Exception:
             self.fail("Person.verify_id() raised Exception for good uuid format.")
-            
+
+    def test_verify_firstName_raises_exception(self):
+        self.assertRaises(Exception, Person("", None, "", "", "").verify_firstName)
+        self.assertRaises(Exception, Person("", "", "", "", "").verify_firstName)
+        self.assertRaises(Exception, Person("", "!nv@lidN@m3", "", "", "").verify_firstName)
+
 if __name__ == '__main__':
     unittest.main()
