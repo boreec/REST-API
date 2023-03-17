@@ -20,6 +20,14 @@ class TestPeopleDatabase(unittest.TestCase):
                 person.verify_birthday()
             except Exception:
                 self.fail("Data retrieved from database is wrong format!")
-        
+
+    def test_select_person_by_id(self):
+        # test None is returned for unknown id.
+        self.assertEqual(None, self.db.select_person_by_id("41f7ad9c-0e21-43c9-bd8e-2678fe421232"))
+
+        person = self.db.select_person_by_id("bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de")
+
+        self.assertTrue(isinstance(person, Person))
+
 if __name__ == '__main__':
     unittest.main()
