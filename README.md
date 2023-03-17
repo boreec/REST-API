@@ -19,3 +19,12 @@ Return a 200 response that contains all people in the system.
 ```terminal
 curl -v http://localhost:5000/people/
 ```
+
+### Tests
+
+To make sure the API works in the way intended, many unit tests were written.
+In order to execute unit tests, run the following command.
+
+```terminal
+(user) $ ~ python3 -m unittest
+```
