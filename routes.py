@@ -103,4 +103,4 @@ def update_person(id):
         return Response(error_message, 400)
 
     db.update_person(person)
-    return Response((json.dumps(person), '\n'), status=200, mimetype)'application/json')
+    return Response((json.dumps(person), '\n'), status=200, mimetype='application/json')
