@@ -104,7 +104,7 @@ class PeopleDatabase():
 
         return None if row == None else Person(row[0],row[1],row[2],row[3],row[4])
     
-    def select_persons_by_name(self, name) -> [Person]:
+    def select_persons_by_name_starting_with(self, name) -> [Person]:
         cursor = self.db_connection.cursor()
         cursor.execute("SELECT * FROM persons WHERE firstName LIKE ?;", (name+'%',))
         rows = cursor.fetchall()

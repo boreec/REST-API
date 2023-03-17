@@ -16,7 +16,7 @@ def get_people():
     if name == None:
         persons = db.select_all_persons()
     else:
-        persons = db.select_persons_by_name(name)
+        persons = db.select_persons_by_name_starting_with(name)
     return Response((json.dumps(persons), '\n'), mimetype='application/json')
     
 @app.route("/people/<id>", methods=['GET'])
