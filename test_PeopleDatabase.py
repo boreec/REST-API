@@ -66,6 +66,15 @@ class TestPeopleDatabase(unittest.TestCase):
         person = self.db.select_person_by_id("bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de")
         # make sure retrieved data has been changed
         self.assertEqual(person['firstName'], "Harry")
+
+    def test_delete_person_with_unknown_person(self):
+        p = Person('???','???','???','???','???')
+
+        persons_before_delete = self.db.select_all_persons()
+        self.db.delete_person(p)
+        persons_after_delete = self.db.select_all_persons()
         
+        self.assertEqual(persons_before_delete, persons_after_delete)
+                
 if __name__ == '__main__':
     unittest.main()
