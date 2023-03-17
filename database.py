@@ -13,7 +13,7 @@ class PeopleDatabase():
             Create a connection to the database, build the
             main table and insert persons into it.            
         """
-        self.db_connection = create_db_connection()
+        self.db_connection = self.create_db_connection()
         self.build_table()
         self.create_persons()
         
@@ -133,15 +133,15 @@ class PeopleDatabase():
         cursor.execute("DELETE FROM persons WHERE id = ?;", (person['id'],))
         self.db_connection.commit()
         
-def create_db_connection():
-    """
-        Create a database connection to a in-memory database. 
-    """
-    db_connection = None
-    try:
-        db_connection = sqlite3.connect(":memory:", check_same_thread=False)
-    except Error as e:
-        print(e)
-    return db_connection
+    def create_db_connection(self):
+        """
+            Create a database connection to a in-memory database. 
+        """
+        db_connection = None
+        try:
+            db_connection = sqlite3.connect(":memory:", check_same_thread=False)
+        except Error as e:
+            print(e)
+        return db_connection
 
 
