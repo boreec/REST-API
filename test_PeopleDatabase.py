@@ -38,6 +38,17 @@ class TestPeopleDatabase(unittest.TestCase):
 
         self.assertTrue(isinstance(person, Person))
         self.assertEqual("johndoe@example.com", person['email'])
-    
+
+    def test_select_persons_by_name_starting_with(self):
+        # test no names are retrieved.
+        self.assertEqual([], self.db.select_persons_by_name_starting_with("eazoieoaz"))
+        # test all names are retrieved.
+        self.assertEqual(4, len(self.db.select_persons_by_name_starting_with("")))
+        # test only names starting with 'j' are retrieved.
+        persons = self.db.select_persons_by_name_starting_with("j")
+        self.assertEqual(2, len(persons))
+        self.assertTrue(persons[0]['firstName'] == 'John' or persons[0]['firstName'] == 'Jane')
+        self.assertTrue(persons[1]['firstName'] == 'John' or persons[1]['firstName'] == 'Jane')
+        
 if __name__ == '__main__':
     unittest.main()
