@@ -30,5 +30,14 @@ class TestPeopleDatabase(unittest.TestCase):
         self.assertTrue(isinstance(person, Person))
         self.assertEqual("bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de", person['id'])
 
+    def test_select_person_by_email(self):
+        # test None is returned for unknown email.
+        self.assertEqual(None, self.db.select_person_by_email("unknown@email.com"))
+
+        person = self.db.select_person_by_email("johndoe@example.com")
+
+        self.assertTrue(isinstance(person, Person))
+        self.assertEqual("johndoe@example.com", person['email'])
+    
 if __name__ == '__main__':
     unittest.main()
