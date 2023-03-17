@@ -82,8 +82,25 @@ def update_person(id):
     
     person = db.select_person_by_id(id)
 
-    if answer == None :
+    if person == None :
         abort(404)
-    else :
-        return Response((json.dumps(answer),'\n'), mimetype='application/json')
     
+    if request.json.get('id') != None :
+        return Response('Impossible to update someone\'s id, as one is linked per user.\n', 400)
+    if request.json.get('email') != None :
+        if db.select_person_by_email(request.json['email']) != None :
+            return Response('Impossible to update that person with that email, someone already has this email registered in database.\n', 400)
+        else:
+            person['email'] = request.json['email']
+
+    person['firstName'] = request.json['firstName'] if request.json.get('firstName') != None else person['firstName']
+    person['lastName'] = request.json['lastName'] if request.json.get('lastName') != None else person['lastName']
+    person['birthday'] = request.json['birthday'] if request.json.get('birthday') != None else person['birthday']
+
+    error_message = person.verify_data()
+
+    if len(error_message) > 0 :
+        return Response(error_message, 400)
+
+    db.update_person(person)
+    return Response((json.dumps(person), '\n'), status=200, mimetype)'application/json')
