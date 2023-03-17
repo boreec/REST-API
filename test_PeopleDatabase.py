@@ -53,6 +53,19 @@ class TestPeopleDatabase(unittest.TestCase):
     def test_update_person_with_unknown_person(self):
         p = Person('???','???','???','???','???')
         self.assertEqual(None, self.db.update_person(p))
-               
+
+    def test_update_person_with_known_person(self):
+        person = self.db.select_person_by_id("bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de")
+        # make sure of retrieved data
+        self.assertEqual(person['firstName'], "John")
+
+        # modify the person's name
+        person['firstName'] = "Harry"
+        self.db.update_person(person)
+
+        person = self.db.select_person_by_id("bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de")
+        # make sure retrieved data has been changed
+        self.assertEqual(person['firstName'], "Harry")
+        
 if __name__ == '__main__':
     unittest.main()
