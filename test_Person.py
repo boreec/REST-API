@@ -59,7 +59,7 @@ class TestPerson(unittest.TestCase):
             Person('','','', 'johndoe@example.com','').verify_email()
             Person('','','', 'a@b.cd','').verify_email()
         except Exception as e:
-            self.fail("Person.verify_email() raised exception for good name format")
+            self.fail("Person.verify_email() raised exception for good name format.")
 
     def test_verify_birthday_raises_exception(self):
         self.assertRaises(Exception, Person("","","","",None).verify_birthday)
@@ -68,7 +68,7 @@ class TestPerson(unittest.TestCase):
         self.assertRaises(Exception, Person("","","","","3000-01-01").verify_birthday)
         self.assertRaises(Exception, Person("","","","","1800-01-01").verify_birthday)
         self.assertRaises(Exception, Person("","","","","1998-13-01").verify_birthday)
-        self.assertRaises(Exception, Person("","","","","1998-02-31").verify_birthday)
+        self.assertRaises(Exception, Person("","","","","1998-02-29").verify_birthday)
 
     def test_verify_birthday_good_format(self):
         try:
