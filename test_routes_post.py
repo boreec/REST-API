@@ -73,21 +73,24 @@ class TestRoutesPOST(unittest.TestCase):
             content_type='application/json')
         self.assertEqual(result.status_code, 400)
         
-    def test_create_person_fails_for_lastName(self):
+    def test_create_person_fails_for_lastName_set_to_None(self):
         invalid_person = copy.deepcopy(self.person_data)
-        # 1. Test for lastName set to None.
         invalid_person['lastName'] = None
         result = self.client.post('/people', 
             data=json.dumps(invalid_person), 
             content_type='application/json')
         self.assertEqual(result.status_code, 400)
-        # 2. Test for lastName set to empty string.
+
+    def test_create_person_fails_for_lastName_set_to_empty_str(self):
+        invalid_person = copy.deepcopy(self.person_data)
         invalid_person['lastName'] = ""
         result = self.client.post('/people', 
             data=json.dumps(invalid_person), 
             content_type='application/json')
         self.assertEqual(result.status_code, 400)
-        # 3. Test for lastName set to invalid name format.
+
+    def test_create_person_fails_for_lastName_set_to_invalid_name_format(self):
+        invalid_person = copy.deepcopy(self.person_data)
         invalid_person['lastName'] = "Sm!sth"
         result = self.client.post('/people', 
             data=json.dumps(invalid_person), 
