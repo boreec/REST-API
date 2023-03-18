@@ -43,6 +43,12 @@ class RoutesTest(unittest.TestCase):
         self.assertTrue(json.loads(result.data)[0]['firstName'] == 'John')
         self.assertTrue(json.loads(result.data)[1]['firstName'] == 'Jane')
 
+    def test_get_people_with_name_starting_with_ja(self):
+        result = self.client.get("/people?name=ja")
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(1, len(json.loads(result.data)))
+        self.assertTrue(json.loads(result.data)[0]['firstName'] == 'Jane')
+        
     def test_get_people_with_name_starting_with_empty_prefix(self):
         result = self.client.get('/people?name=')
         self.assertEqual(result.status_code, 200)
