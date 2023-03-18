@@ -23,3 +23,7 @@ class TestRoutesPOST(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         created_person = json.loads(result.data)
         self.assertEqual(self.person_data, created_person)
+
+
+if __name__ == "__main__":
+    unittest.main()
