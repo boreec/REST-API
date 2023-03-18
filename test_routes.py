@@ -36,14 +36,14 @@ class RoutesTest(unittest.TestCase):
         result = self.client.get('/people/bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de/age')
         self.assertEqual(date.today().year - 1997, int(result.data))
 
-    def get_people_with_name_starting_with_j(self):
+    def test_get_people_with_name_starting_with_j(self):
         result = self.client.get("/people?name='j'")
         self.assertEqual(result.status_code, 200)
         self.assertEqual(2, len(json.loads(result.data)))
         self.assertTrue(json.loads(result.data)[0]['firstName'] == 'John')
         self.assertTrue(json.loads(result.data)[1]['firstName'] == 'Jane')
 
-    def get_people_with_name_starting_with_empty_prefix(self):
+    def test_get_people_with_name_starting_with_empty_prefix(self):
         result = self.client.get("/people?name=''")
         self.assertEqual(result.status_code, 200)
         self.assertEqual(4, len(json.loads(result.data)))
@@ -52,7 +52,7 @@ class RoutesTest(unittest.TestCase):
         self.assertTrue(json.loads(result.data)[2]['firstName'] == 'Brian')
         self.assertTrue(json.loads(result.data)[3]['firstName'] == 'Ashley')
 
-    def get_people_with_name_starting_with_unknown_prefix(self):
+    def test_get_people_with_name_starting_with_unknown_prefix(self):
         result = self.client.get("/people?name='unknown_prefix'")
         self.assertEqual(result.status_code, 220)
         self.assertTrue(json.loads(result.data) == [])
