@@ -87,6 +87,33 @@ class TestRoutesPOST(unittest.TestCase):
             data=json.dumps(invalid_person), 
             content_type='application/json')
         self.assertEqual(result.status_code, 400)
+
+    def test_create_person_fails_for_email(self):
+        invalid_person = copy.deepcopy(self.person_data)
+        # 1. Test for email set to None
+        invalid_person['email'] = None
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
+        # 2. Test for email set to empty string.
+        invalid_person['email'] = ""
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
+        # 3. Test for email set to invalid email format.
+        invalid_person['email'] = "inval...id@em;ail@format.com"
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
+        # 4. Test for email set to already used email.
+        invalid_person['email'] = "johndoe@example.com"
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
         
 if __name__ == "__main__":
     unittest.main()
