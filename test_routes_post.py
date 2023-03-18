@@ -45,6 +45,27 @@ class TestRoutesPOST(unittest.TestCase):
             data=json.dumps(invalid_person), 
             content_type='application/json')
         self.assertEqual(result.status_code, 400)
+
+    def test_create_person_fails_for_firstName(self):
+        invalid_person = copy.deepcopy(self.person_data)
+        # 1. Test for firstName set to None.
+        invalid_person['firstName'] = None
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
+        # 2. Test for firstName set to empty string.
+        invalid_person['firstName'] = ""
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
+        # 3. Test for firstName set to invalid name format.
+        invalid_person['firstName'] = "W@lt3rZ"
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
         
 if __name__ == "__main__":
     unittest.main()
