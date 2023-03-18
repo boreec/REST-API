@@ -90,7 +90,7 @@ class TestRoutesPOST(unittest.TestCase):
 
     def test_create_person_fails_for_email(self):
         invalid_person = copy.deepcopy(self.person_data)
-        # 1. Test for email set to None
+        # 1. Test for email set to None.
         invalid_person['email'] = None
         result = self.client.post('/people', 
             data=json.dumps(invalid_person), 
@@ -114,6 +114,40 @@ class TestRoutesPOST(unittest.TestCase):
             data=json.dumps(invalid_person), 
             content_type='application/json')
         self.assertEqual(result.status_code, 400)
+
+    def test_create_person_fails_for_birthday(self):
+        invalid_person = copy.deepcopy(self.person_data)
+        # 1. Test for birthday set to None.
+        invalid_person['birthday'] = None
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
+        # 2. Test for birthday set to empty string.
+        invalid_person['birthday'] = ""
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
+        # 3. Test for birthday set to future date.
+        invalid_person['birthday'] = "3230-01-01"
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
+        # 4. Test for birthday set to too old date.
+        invalid_person['birthday'] = "1800-01-01"
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
+        # 5. Test for birthday set to no unreal date.
+        invalid_person['birthday'] = "1998-02-29"
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
+        
         
 if __name__ == "__main__":
     unittest.main()
