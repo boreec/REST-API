@@ -25,21 +25,24 @@ class TestRoutesPOST(unittest.TestCase):
         created_person = json.loads(result.data)
         self.assertEqual(self.person_data, created_person)
 
-    def test_create_person_fails_for_id(self):
+    def test_create_person_fails_for_id_set_to_None(self):
         invalid_person = copy.deepcopy(self.person_data)
-        # 1. Test for id set to None.
         invalid_person['id'] = None
         result = self.client.post('/people', 
             data=json.dumps(invalid_person), 
             content_type='application/json')
         self.assertEqual(result.status_code, 400)
-        # 2. Test for id set to empty string.
+
+    def test_create_person_fails_for_id_set_to_empty_str(self):
+        invalid_person = copy.deepcopy(self.person_data)
         invalid_person['id'] = ""
         result = self.client.post('/people', 
             data=json.dumps(invalid_person), 
             content_type='application/json')
         self.assertEqual(result.status_code, 400)
-        # 3. Test for id not compliant to UUID v4 format.
+
+    def test_create_person_fails_for_id_set_to_invalid_uuid_format(self):
+        invalid_person = copy.deepcopy(self.person_data)
         invalid_person['id'] = "02830-238028-308838-dsndsds"
         result = self.client.post('/people', 
             data=json.dumps(invalid_person), 
