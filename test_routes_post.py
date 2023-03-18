@@ -49,6 +49,14 @@ class TestRoutesPOST(unittest.TestCase):
             content_type='application/json')
         self.assertEqual(result.status_code, 400)
 
+    def test_create_person_fails_for_id_already_taken(self):
+        invalid_person = copy.deepcopy(self.person_data)
+        invalid_person['id'] = "bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de"
+        result = self.client.post('/people', 
+            data=json.dumps(invalid_person), 
+            content_type='application/json')
+        self.assertEqual(result.status_code, 400)
+
     def test_create_person_fails_for_firstName_set_to_None(self):
         invalid_person = copy.deepcopy(self.person_data)
         invalid_person['firstName'] = None
