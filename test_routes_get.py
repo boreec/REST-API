@@ -64,6 +64,31 @@ class TestRoutesGET(unittest.TestCase):
         result = self.client.get("/people?name=unknown_prefix")
         self.assertEqual(result.status_code, 200)
         self.assertTrue(json.loads(result.data) == [])
+
+# class TestCreatePerson(unittest.TestCase):
+#     def setUp(self):
+#         app.config['TESTING'] = True
+#         self.client = app.test_client()
         
+#     def test_create_person_success(self):
+#         person_data = dict(
+#             id = "9d0e6be3-18e1-4e77-96ac-2e9260babe74",
+#             firstName = "Jack",
+#             lastName="Sparrow",
+#             email="jacksparrow@pirates.com",
+#             birthday="2000-10-23"
+#         )
+        
+#         client_rw = app.test_client()
+        
+#         result = client_rw.post('/people', 
+#             data=json.dumps(person_data), 
+#             content_type='application/json')
+        
+#         print(result.data)
+#         self.assertEqual(result.status_code, 200)
+#         created_person = json.loads(result.data)
+#         self.assertEqual(person_data, created_person)
+
 if __name__ == '__main__':
     unittest.main()
