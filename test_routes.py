@@ -51,6 +51,11 @@ class RoutesTest(unittest.TestCase):
         self.assertTrue(json.loads(result.data)[1]['firstName'] == 'Jane')
         self.assertTrue(json.loads(result.data)[2]['firstName'] == 'Brian')
         self.assertTrue(json.loads(result.data)[3]['firstName'] == 'Ashley')
+
+    def get_people_with_name_starting_with_unknown_prefix(self):
+        result = self.client.get("/people?name='unknown_prefix'")
+        self.assertEqual(result.status_code, 220)
+        self.assertTrue(json.loads(result.data) == [])
         
 if __name__ == '__main__':
     unittest.main()
