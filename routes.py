@@ -38,9 +38,9 @@ def get_person_age(id):
         Identify a person by a provided it, calculate and return a 200 of its age.
         A 404 response is returned if that person is not in the system.
     """
-    answer = db.select_person_by_id(id)
+    person = db.select_person_by_id(id)
 
-    if answer == None:
+    if person == None:
         abort(404)
     else :
         born_year = int(answer["birthday"].split('-')[0])
