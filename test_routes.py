@@ -33,5 +33,10 @@ class RoutesTest(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertEqual('bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de', json.loads(result.data)['id'])
 
+    def test_get_person_age_200(self):
+        result = self.client.get('/people/bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de/age')
+        self.assertEqual(date.today().year - 1997, int(result.data))
+
+        
 if __name__ == '__main__':
     unittest.main()
