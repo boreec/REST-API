@@ -23,6 +23,10 @@ class RoutesTest(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertEqual('bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de', json.loads(result.data)['id'])
 
+    def test_get_person_age_404(self):
+        result = self.client.get('/people/unknown-id')
+        self.assertEqual(result.status_code, 404)
+
         
 if __name__ == '__main__':
     unittest.main()
