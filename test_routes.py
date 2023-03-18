@@ -1,15 +1,17 @@
+# -*- coding: utf-8 -*-
+
 import unittest
 import json
 from app import app
 from routes import *
 from datetime import date
 
-class RoutesTest(unittest.TestCase):
+class TestRoutesGET(unittest.TestCase):
 
     def setUp(self):
         self.client = app.test_client()
         self.client.testing = True
-
+        
     def test_get_people(self):
         result = self.client.get('/people')
         self.assertEqual(result.status_code, 200)
@@ -59,7 +61,7 @@ class RoutesTest(unittest.TestCase):
         self.assertTrue(json.loads(result.data)[3]['firstName'] == 'Ashley')
 
     def test_get_people_with_name_starting_with_unknown_prefix(self):
-        result = self.client.get("/people?name=\'unknown_prefix\'")
+        result = self.client.get("/people?name=unknown_prefix")
         self.assertEqual(result.status_code, 200)
         self.assertTrue(json.loads(result.data) == [])
         
