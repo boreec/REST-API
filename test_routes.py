@@ -37,6 +37,12 @@ class RoutesTest(unittest.TestCase):
         result = self.client.get('/people/bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de/age')
         self.assertEqual(date.today().year - 1997, int(result.data))
 
+    def get_people_with_name_starting_with_j(self):
+        result = self.client.get("/people?name='j'")
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(2, len(json.loads(result.data)))
+        self.assertEqual(2, json.loads(result.data)[0]['firstName'] == 'John')
+        self.assertEqual(2, json.loads(result.data)[1]['firstName'] == 'Jane')
         
 if __name__ == '__main__':
     unittest.main()
