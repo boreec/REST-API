@@ -43,9 +43,9 @@ def get_person_age(id):
     if person == None:
         abort(404)
     else :
-        born_year = int(answer["birthday"].split('-')[0])
-        born_month = int(answer["birthday"].split('-')[1])
-        born_day = int(answer["birthday"].split('-')[2])
+        born_year = int(person["birthday"].split('-')[0])
+        born_month = int(person["birthday"].split('-')[1])
+        born_day = int(person["birthday"].split('-')[2])
         today = date.today()
         age = today.year - born_year - ((today.month, today.day) < (born_month, born_day))
         return jsonify(age)
