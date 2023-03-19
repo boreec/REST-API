@@ -8,8 +8,18 @@ import json
 @app.route("/people", methods=['GET'])
 def get_people():
     """
-        Return a 200 response that contains all people in the system. 
+    Retrieves a list of people from the database.
+
+    If the paramer 'name' is provided, the list of people that
+    firstName or lastName starting with the value of this parameter
+    is returned.
+    
+    :param name: The name of the person(s) to retrieve.
+    :type name: str
+    :returns: A JSON representation of the list of people.
+    :rtype: str
     """
+    
     args = request.args
     name = args.get('name')
     persons = []
