@@ -93,10 +93,14 @@ class PeopleDatabase():
         
         return None if row == None else Person(row[0],row[1],row[2],row[3],row[4])
 
-    def select_person_by_email(self, email) -> Person:
+    def select_person_by_email(self, email: str) -> Person:
         """
-            Return a person from the table corresponding to
-            a provided id.  
+        Selects a person from the database by their email address.
+
+        :param email: The email address to search for.
+        :type email: str
+        :return: The person with the specified email address, or None if not found.
+        :raises sqlite3.Error: If an error occurs while querying the database.
         """
         cursor = self.db_connection.cursor()
         cursor.execute("SELECT * FROM persons WHERE email = ?", (email,))
