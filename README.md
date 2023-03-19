@@ -65,7 +65,7 @@ Note that all data received from the endpoints or the data sent to the endpoints
 is in a JSON format with the mimetype `application/JSON`.
 
 #### route GET /people
-The route GET `/people` has a 200 response that contains all people in the system
+The route `GET /people` has a 200 response that contains all people in the system
 as a JSON format.
 
 For example:
@@ -76,7 +76,7 @@ $ curl http://localhost:5000/people
 
 #### route GET /people/:id
 
-The route GET `/people/:id` has a 200 response containing the requested person or a
+The route `GET /people/:id` has a 200 response containing the requested person or a
 404 response if the person does not exist.
 
 For example:
@@ -94,7 +94,7 @@ $ curl http://localhost:5000/people/qsdqsdqoisudoiaze
 
 #### route GET /people/:id/age
 
-The route GET `/people/:id/age` has a 200 response containing the age of the person on the current date, 
+The route `GET /people/:id/age` has a 200 response containing the age of the person on the current date, 
 or a 404 response if the person does not exist.
 
 For example (command ran on march 20th 2023):
@@ -112,7 +112,7 @@ $ curl http://localhost:5000/people/qsdqsdqoisudoiaze/age
 
 #### route GET /people?name=:name
 
-The route GET `/people?name=:name` has a 200 response that contains the people whose first or last name
+The route `GET /people?name=:name` has a 200 response that contains the people whose first or last name
 meets the search criterial. If there are no results, an empty array is returned. if the parameter is provided
 but empty, all the persons are returned.
 
@@ -130,7 +130,7 @@ $ curl http://localhost:5000/people?name=sqdl
 
 #### route POST /people
 
-The route POST `/people` creates a person and returns a 200 response with the created person if the creation is successful, or 400 response if there is a problem
+The route `POST /people` creates a person and returns a 200 response with the created person if the creation is successful, or 400 response if there is a problem
 with the data provided. Typically, a 400 response will be generated in the following cases:
 - An `id` field is provided: It's not possible to change a person's id, it's unique.
 - The `firstName` and/or `lastName` provided field has invalid format (empty, containing numbers or special characters, etc.).
@@ -152,7 +152,7 @@ Person with similar id already exist in database.
 
 #### route PUT /people/:id
 
-The route PUT `/people/:id` will update a person with the provided id. It returns a 200
+The route `PUT /people/:id` will update a person with the provided id. It returns a 200
 response and the updated person on success, a 400 response if the provided information are incorrect,
  and a 404 response if the person is not found.
 
@@ -164,7 +164,7 @@ $ curl -X PUT http://localhost:5000/people/bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de 
 
 #### route DELETE /people:id
 
-The route DELETE `/people/:id` deletes a person with the provided id. It returns a 200 response and the deleted person
+The route `DELETE /people/:id` deletes a person with the provided id. It returns a 200 response and the deleted person
 on success, or a 404 response if the person does not exists.
 For example:
 ```terminal
