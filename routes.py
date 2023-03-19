@@ -79,6 +79,18 @@ def create_person():
 
 @app.route("/people/<id>", methods=['PUT'])
 def update_person(id):
+    """
+    Updates the person with given id in the database.
+
+    :param id: The id of the person to be updated.
+    :type id: str
+    :returns: A JSON response containing the updated person details.
+    :rtype: flask.Response
+
+    :raises 404: If the person with the given id does not exist in the database.
+    :raises 400: If the request contains invalid data.
+
+    """    
     
     person = db.select_person_by_id(id)
 
