@@ -22,6 +22,13 @@ class Person(OrderedDict):
 
 
     def verify_id(self):
+        """
+        Verify that the 'id' attribute of the Person object is valid.
+        It is considered valid if it respects the UUID v4 format.
+
+        :raises Exception: If the 'id' attribute is missing or invalid.
+        """
+        
         if self['id'] == None:
             raise Exception("Id is missing.")
         if len(self['id']) == 0:
