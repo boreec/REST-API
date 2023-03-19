@@ -46,6 +46,11 @@ class Person(OrderedDict):
             raise Exception("Invalid lastName: Bad format.")
         
     def verify_email(self):
+        """
+        Verify that the 'email' attribute of the Person object is valid.
+
+        :raises Exception: If the 'email' attribute is missing or invalid.
+        """
         if self['email'] == None:
             raise Exception("Email address is missing.")
         if len(self['email']) == 0:
