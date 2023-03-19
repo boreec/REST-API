@@ -3,7 +3,7 @@ import json
 from app import app
 from routes import *
 
-class TestRoutesUPDATE(unittest.TestCase):
+class TestRoutesPUT(unittest.TestCase):
 
     # to do
     pass
