@@ -104,9 +104,20 @@ class PeopleDatabase():
 
         return None if row == None else Person(row[0],row[1],row[2],row[3],row[4])
     
-    def select_persons_by_name_starting_with(self, name) -> [Person]:
+    def select_persons_by_name_starting_with(self, name: str) -> [Person]:
+        """
+        Selects persons from the database whose firstName or lastName starts with a given string.
+        If the given string has no match, an empty list is returned.
+        If the given string is empty, all persons are returned.
+        
+        :param name: The string to match against the beginning of the first name.
+        :type name: str
+        :return: A list of persons whose firstName or lastName starts with the given string.
+        :rtype: [Person]
+        :raises sqlite3.Error: If an error occurs while querying the database.
+        """
         cursor = self.db_connection.cursor()
-        cursor.execute("SELECT * FROM persons WHERE firstName LIKE ?;", (name+'%',))
+        cursor.execute("SELECT * FROM persons WHERE firstName LIKE ? OR lastName LIKE ?;", (name+'%',name+'%',))
         rows = cursor.fetchall()
         persons = []
         for row in rows:
