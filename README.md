@@ -3,15 +3,62 @@
 This REST API is written in Python with the Flask framework and uses SQLite to store
 information in memory.
 
+For this example, the dabase contains a list of 4 persons with the following fields:
+- `id` : text (UUID version 4) 
+- `firstName` : text
+- `lastName` : text
+- `email` : text (with format a@b.cd)
+- `birthday` : text (compliant with ISO 8601 like '2022-01-01')
+
 ## How to use ?
+
+### Install the requirements
+
+It is recommended to create a virtual environment at first:
+
+```terminal
+python3 -m venv api_env  
+```
+
+Once the command completes, activate the virtual environment by running
+the appropriate command for your operating system:
+
+On Windows:
+
+```terminal
+api_env\Scripts\activate.bat
+```
+
+On Unix or Linux:
+
+```terminal
+source api_env/bin/activate
+```
+
+The virtual environment should be activated, and you can install packages and run
+Python scripts within it.
+
+To install the required packages into your virtual environment, navigate to the
+directory where you cloned this repository and use the `pip` command.
+
+```terminal
+pip install -r requirements.txt
+```
+
+This will install all the packages listed in the `requirements.txt` file. If any packages
+are already installed, `pip` will skip them and move on to the next one. If you encounter 
+any errors during the installation process, make sure to check the output for any error 
+messages and resolve them accordingly. 
 
 ### Run the server
 
+The entry point of the server is located in the file `app.py`.
+
 ```terminal
-python3 main.py
+python3 app.py
 ````
 
-### Call the API
+### Call the API endpoints
 
 Using `curl`, the following can be done:
 
