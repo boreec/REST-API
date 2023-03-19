@@ -5,12 +5,21 @@ from app import app
 from routes import *
 
 class TestRoutesDELETE(unittest.TestCase):
+    """
+    A test case for the DELETE route of the API.
+    """
     
     def setUp(self):
+        """
+        Set up the test case by creating a test client and enabling testing mode.
+        """
         self.client = app.test_client()
         self.client.testing = True
 
     def test_delete_person_success(self):
+        """
+        Test the sucessful deletion of a person. 
+        """
         temporary_person = dict(
             id="6e0f74c1-fbcd-4ea9-8faf-6b9d9fc14015",
             firstName="Jason",
@@ -43,6 +52,9 @@ class TestRoutesDELETE(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
 
     def delete_person_not_found(self):
+        """
+        Test the deletion of a person that does not exist.  
+        """
         response = self.client.delete('/people/unknown_id')
         self.assertEqual(response.status_code, 404)
         
