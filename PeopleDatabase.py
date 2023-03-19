@@ -5,14 +5,15 @@ from collections import OrderedDict
 
 class PeopleDatabase():
     """
-        Class used for creating a database containing persons
-        in memory and handling various queries on the table. 
+    A class representing a database for storing people.
+    ivar db_connection: a connection object to the database.
     """
+   
     def __init__(self):
         """
-            Create a connection to the database, build the
-            main table and insert persons into it.            
+        Initialize a new PeopleDatabase object.
         """
+        
         self.db_connection = self.create_db_connection()
         self.build_table()
         self.create_persons()
