@@ -22,9 +22,15 @@ def get_people():
 @app.route("/people/<id>", methods=['GET'])
 def get_person_by_id(id):
     """
-        Return a 200 response containing the person with the provided
-        id, or a 404 response if that person is not in the system.
+    Retrieves the person with the specified ID from the database.
+
+    :param id: The ID of the person.
+    :type id: str
+    :returns: A JSON representation of the person.
+    :rtype: str
+    :raises 404: If the person with the specified ID is not found in the database.
     """
+    
     answer = db.select_person_by_id(id)
 
     if answer == None :
@@ -35,9 +41,15 @@ def get_person_by_id(id):
 @app.route("/people/<id>/age", methods=['GET'])
 def get_person_age(id):
     """
-        Identify a person by a provided it, calculate and return a 200 of its age.
-        A 404 response is returned if that person is not in the system.
+    Returns the age of the person with the specified ID.
+
+    :param id: The ID of the person.
+    :type id: str
+    :returns: A JSON representation of the person's age.
+    :rtype: str
+    :raises 404: If the person with the specified ID is not found in the database.
     """
+    
     person = db.select_person_by_id(id)
 
     if person == None:
