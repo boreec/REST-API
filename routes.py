@@ -52,7 +52,16 @@ def get_person_age(id):
 
 @app.route("/people", methods=['POST'])
 def create_person():
+    """
+    Creates a person inside the database.
 
+    :returns: a JSON response containing the person details.
+    :rtype: flask.Response
+
+    :raises 400: If the request contains invalid data.
+    :raises 500: If the query to insert the data failed.   
+    """
+    
     person = Person(
         request.json['id'],
         request.json['firstName'],
