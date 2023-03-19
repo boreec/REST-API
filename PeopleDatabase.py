@@ -68,8 +68,11 @@ class PeopleDatabase():
 
     def select_all_persons(self) -> [Person]:
         """
-            Return the entire 'persons' table as a
-            list of fields. 
+        Selects all persons from the database.
+
+        :return: A list of all persons in the database.
+        :rtype: [Person]
+        :raises sqlite3.Error: If an error occurs while querying the database.
         """
         cursor = self.db_connection.cursor()
         cursor.execute("SELECT * FROM persons;")
