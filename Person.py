@@ -69,6 +69,21 @@ class Person(OrderedDict):
             raise Exception("Invalid birthday: You can not be born in the future.")
 
     def verify_data(self) -> str:
+        """
+        Verify the data entered for a Person object.
+
+        This method calls several other methods to verify the different
+        attributes of the Person object: id, firstName, lastName, email and
+        birthday. If any of the verification methods raises an exception, the
+        error message is concatenated to a string, which is returned at the end
+        of the method.
+
+        Returns:
+            str: an error message string that contains all the errors raised
+                 during the verification process. If there are no errors, the
+                 string will be empty.
+        """
+        
         error_message = ""
 
         try:
