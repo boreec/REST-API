@@ -128,7 +128,15 @@ class PeopleDatabase():
         cursor.execute(sql_statement, (person['firstName'],person['lastName'],person['email'],person['birthday'], person['id']))
         self.db_connection.commit()
 
-    def delete_person(self, person: Person):
+    def delete_person(self, person: Person) -> Person:
+        """
+        Deletes a person from the database. If the deletion is successful, the deleted
+        person is returned, otherwise an Error is raised.
+
+        :param person: The person to delete.
+        :type person: Person
+        :raises sqlite3.Error: If an error occurs while deleting the person.
+        """
         cursor = self.db_connection.cursor()
         cursor.execute("DELETE FROM persons WHERE id = ?;", (person['id'],))
         self.db_connection.commit()
