@@ -107,6 +107,16 @@ def update_person(id):
 
 @app.route("/people/<id>", methods=['DELETE'])
 def delete_person(id):
+    """
+    Delete a person from the database by ID.
+
+    :param id: The ID of the person to delete.
+    :type id: str
+    :return: A JSON response containing the deleted person's information.
+    :rtype: flask.Response
+    :raises 404: If the person with the specified ID is not found.
+    """
+
     person = db.select_person_by_id(id)
 
     if person == None :
