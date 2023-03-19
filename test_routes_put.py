@@ -29,6 +29,14 @@ class TestRoutesPUT(unittest.TestCase):
         self.assertEqual(self.person_data['firstName'], json.loads(response.data)['firstName'])
         self.assertEqual(self.person_data['lastName'], json.loads(response.data)['lastName'])
         self.assertEqual(self.person_data['birthday'], json.loads(response.data)['birthday'])
-        
+
+    def test_update_person_not_found_for_unknown_id(self):
+        response = self.client.put(
+            '/people/unknown_id',
+            data = json.dumps(self.person_data),
+            content_type = 'application/json'
+        )
+        self.assertEqual(response.status_code, 404)
+                
 if __name__ == "__main__":
     unittest.main()
