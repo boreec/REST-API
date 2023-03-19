@@ -54,8 +54,10 @@ class PeopleDatabase():
 
     def create_persons(self):
         """
-            Define various different persons and insert them inside the
-            'persons' table via create_person(). 
+        Inserts 4 new persons in the database to perform basic operations
+        on them during runtime.
+
+        :raises sqlite3.Error: if an error occurs while inserting the person into the database. 
         """
         p1 = Person('bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de','John','Doe','johndoe@example.com','1997-01-01')
         p2 = Person('d5356358-b39f-4c6e-9690-2c965a607702','Jane','Doe','janedoe@example.com','1991-07-28')
