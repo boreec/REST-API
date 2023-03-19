@@ -4,8 +4,8 @@ import unittest
 
 class TestPeopleDatabase(unittest.TestCase):
     """
-    A class that with unit tests to ensure good behaviour
-    for class PeopleDatabase.
+    A class to ensure good behaviour of the class PeopleDatabase,
+    by testing its functions.
     """
     
     def setUp(self):
