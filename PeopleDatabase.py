@@ -19,8 +19,15 @@ class PeopleDatabase():
         
     def build_table(self):
         """
-            Create the 'persons' table with its fields.             
+        Create a table named "persons" in the database with the following columns:
+    
+        - id (text): The unique identifier of the person with the format UUID v4.
+        - firstName (text): The first name of the person.
+        - lastName (text): The last name of the person.
+        - email (text): The email address of the person.
+        - birthday (text): The birthday of the person with the format YYYY-MM-DD.
         """
+    
         sql_statement = \
         """
             CREATE TABLE IF NOT EXISTS persons (
