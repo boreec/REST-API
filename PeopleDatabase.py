@@ -135,7 +135,13 @@ class PeopleDatabase():
         
     def create_db_connection(self):
         """
-            Create a database connection to a in-memory database. 
+        Create a database connection to a in-memory database.
+        The database will only be active during the runtime of the program.
+        All data are created at runtime and deleted after execution.
+
+        :return: A database connection object.
+        :rtype: sqlite3.Connection
+        :raises Error: If the connection cannot be established. 
         """
         db_connection = None
         try:
