@@ -5,8 +5,14 @@ from app import app
 from routes import *
 
 class TestRoutesPUT(unittest.TestCase):
-    
+    """
+    A test class for the PUT routes of the API.
+    """
+
     def setUp(self):
+        """
+        Sets up the test client.  
+        """
         self.client = app.test_client()
         self.client.testing = True
         self.person_data = dict(
@@ -18,6 +24,10 @@ class TestRoutesPUT(unittest.TestCase):
         )
 
     def test_update_person_success(self):
+        """
+        This test checks whether a person can be successfully updated by
+        sending a PUT request to the '/people/{id}' endpoint with valid data.   
+        """
         valid_person = copy.deepcopy(self.person_data)
         valid_person.pop('id')
         response = self.client.put(
@@ -31,6 +41,10 @@ class TestRoutesPUT(unittest.TestCase):
         self.assertEqual(self.person_data['birthday'], json.loads(response.data)['birthday'])
 
     def test_update_person_not_found_for_unknown_id(self):
+        """
+        This test checks if 404 is returned when sending a PUT request to 
+        the '/people/{id}' endpoint with unknown id.   
+        """
         response = self.client.put(
             '/people/unknown_id',
             data = json.dumps(self.person_data),
@@ -39,6 +53,11 @@ class TestRoutesPUT(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_update_person_with_another_id(self):
+        """
+        This test checks if 400 is returned when sending a PUT request to 
+        the '/people/{id}' endpoint when a 'id' field is included inside the
+        data, and that id is already taken by someone else in the database..   
+        """
         response = self.client.put(
             '/people/bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de',
             data=json.dumps(self.person_data),
@@ -46,7 +65,12 @@ class TestRoutesPUT(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 400)
 
-    def test_update_person_with_another_email(self):
+    def test_update_person_with_an_email_already_taken(self):
+        """
+        This test checks if 400 is returned when sending a PUT request to 
+        the '/people/{id}' endpoint when a 'email' field is included inside 
+        the data, and that email is already taken by someone else in the database. 
+        """
         invalid_person = copy.deepcopy(self.person_data)
         invalid_person.pop('id')
         invalid_person['email'] = 'janedoe@example.com'
@@ -58,6 +82,11 @@ class TestRoutesPUT(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_update_person_with_firstName_set_to_empty_str(self):
+        """
+        This test checks if 400 is returned when sending a PUT request to
+        the '/people/{id}' endpoint when a 'firstName' field is included, 
+        but its value is empty.  
+        """
         invalid_person = copy.deepcopy(self.person_data)
         invalid_person.pop('id')
         invalid_person['firstName'] = ''
@@ -69,6 +98,11 @@ class TestRoutesPUT(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_update_person_with_firstName_set_to_invalid_format(self):
+        """
+        This test checks if 400 is returned when sending a PUT request to
+        the '/people/{id}' endpoint when a 'firstName' field is included, 
+        but its value is invalid format.  
+        """
         invalid_person = copy.deepcopy(self.person_data)
         invalid_person.pop('id')
         invalid_person['firstName'] = '!nv@lid'
@@ -80,6 +114,11 @@ class TestRoutesPUT(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         
     def test_update_person_with_lastName_set_to_empty_str(self):
+        """
+        This test checks if 400 is returned when sending a PUT request to
+        the '/people/{id}' endpoint when a 'lastName' field is included, 
+        but its value is empty.  
+        """
         invalid_person = copy.deepcopy(self.person_data)
         invalid_person.pop('id')
         invalid_person['lastName'] = ''
@@ -91,6 +130,11 @@ class TestRoutesPUT(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_update_person_with_lastName_set_to_invalid_format(self):
+        """
+        This test checks if 400 is returned when sending a PUT request to
+        the '/people/{id}' endpoint when a 'lastName' field is included, but 
+        its value is invalid format.  
+        """
         invalid_person = copy.deepcopy(self.person_data)
         invalid_person.pop('id')
         invalid_person['lastName'] = '!nv@lid'
@@ -103,6 +147,11 @@ class TestRoutesPUT(unittest.TestCase):
 
 
     def test_update_person_with_email_set_to_empty_str(self):
+        """
+        This test checks if 400 is returned when sending a PUT request to
+        the '/people/{id}' endpoint when a 'email' field is included, but 
+        its value is empty.  
+        """
         invalid_person = copy.deepcopy(self.person_data)
         invalid_person.pop('id')
         invalid_person['email'] = ''
@@ -115,6 +164,11 @@ class TestRoutesPUT(unittest.TestCase):
 
     
     def test_update_person_with_email_set_to_invalid_format(self):
+        """
+        This test checks if 400 is returned when sending a PUT request to
+        the '/people/{id}' endpoint when a 'email' field is included, but
+        its value is invalid format.  
+        """
         invalid_person = copy.deepcopy(self.person_data)
         invalid_person.pop('id')
         invalid_person['email'] = 'wrong,,format@gmail!com'
@@ -126,6 +180,11 @@ class TestRoutesPUT(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         
     def test_update_person_with_birthday_set_to_empty_str(self):
+        """
+        This test checks if 400 is returned when sending a PUT request to
+        the '/people/{id}' endpoint when a 'birthday' field is included, 
+        but its value is empty.  
+        """
         invalid_person = copy.deepcopy(self.person_data)
         invalid_person.pop('id')
         invalid_person['birthday'] = ''
@@ -137,6 +196,11 @@ class TestRoutesPUT(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_update_person_with_birthday_set_to_future_date(self):
+        """
+        This test checks if 400 is returned when sending a PUT request to
+        the '/people/{id}' endpoint when a 'birthday' field is included, but 
+        its value is a future date.  
+        """
         invalid_person = copy.deepcopy(self.person_data)
         invalid_person.pop('id')
         invalid_person['birthday'] = '3500-01-01'
