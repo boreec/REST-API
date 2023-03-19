@@ -30,6 +30,12 @@ class Person(OrderedDict):
             raise Exception("Invalid id: not compliant with uuid v4 format.")
 
     def verify_firstName(self):
+        """
+        Verify that the 'firstName' attribute of the Person object is valid.
+
+        :raises Exception: If the 'firstName' attribute is missing or invalid.
+        """
+
         if self['firstName'] == None:
             raise Exception("firstName is missing.")
         if len(self['firstName']) == 0:
