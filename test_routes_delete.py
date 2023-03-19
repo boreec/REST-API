@@ -42,6 +42,9 @@ class TestRoutesDELETE(unittest.TestCase):
         response = self.client.get('/people/' + temporary_person['id'])
         self.assertEqual(response.status_code, 404)
 
+    def delete_person_not_found(self):
+        response = self.client.delete('/people/unknown_id')
+        self.assertEqual(response.status_code, 404)
         
 if __name__ == "__main__":
     unittest.main()
