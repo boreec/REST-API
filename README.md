@@ -23,8 +23,9 @@ curl -v http://localhost:5000/people/
 ### Tests
 
 To make sure the API works in the way intended, many unit tests were written.
-In order to execute unit tests, run the following command.
+The unit tests are contained by files in the `tests` folder.
+In order to execute them, run the following command.
 
 ```terminal
-python3 -m unittest
+python3 -m unittest discover -s tests
 ```
