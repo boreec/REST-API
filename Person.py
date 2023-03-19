@@ -54,6 +54,12 @@ class Person(OrderedDict):
             raise Exception("Invalid email address: not compliant with email address format.")
 
     def verify_birthday(self):
+        """
+        Verify that the 'birthday' attribute of the Person object is valid.
+
+        :raises Exception: If the 'birthday' attribute is missing or invalid.
+        """
+        
         if self['birthday'] == None:
             raise Exception("Birthday is missing.")
         try: 
