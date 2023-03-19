@@ -82,10 +82,14 @@ class PeopleDatabase():
             
         return persons
 
-    def select_person_by_id(self, id) -> Person:
+    def select_person_by_id(self, id: str) -> Person:
         """
-            Return a person from the table corresponding to
-            a provided id.  
+        Selects a person from the database by their id.
+
+        :param id: The id to search for.
+        :type id: str
+        :return: The person with the specified email address, or None if not found.
+        :raises sqlite3.Error: If an error occurs while querying the database.
         """
         cursor = self.db_connection.cursor()
         cursor.execute("SELECT * FROM persons WHERE id = ?", (id,))
