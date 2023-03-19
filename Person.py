@@ -8,8 +8,31 @@ name_regex = re.compile(r'[A-Za-z]{2,50}')
 email_regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
 
 class Person(OrderedDict):
+    """
+    The `Person` class is a subclass of `OrderedDict` and represents an individual person
+    wih the following attributes:
+    - `id` a string representing the unique identifier of the person.
+    - `firstName` a string representing the first name of the person.
+    - `lastName` a string representing the last name of the person.
+    - `email` a string representing the email address of the person.
+    - `birthday`: a string representing the birth of the person in the format YYYY-MM-DD.      
+    """
     
     def __init__(self, id: str, firstName: str, lastName: str, email: str, birthday: str):
+        """
+        Constructor for the Person class.
+
+        :param id: A string representing the person's ID.
+        :type id: str
+        :param firstName: A string representing the person's first name.
+        :type firstName: str
+        :param lastName: A string representing the person's last name.
+        :type lastName: str
+        :param email: A string representing the person's email.
+        :type email: str
+        :param birthday: A string representing the person's birthday in the format 'YYYY-MM-DD'.
+        :type birthday: str
+        """
         super(OrderedDict, self).__init__()
         self['id'] = id
         self['firstName'] = firstName
@@ -18,6 +41,12 @@ class Person(OrderedDict):
         self['birthday'] = birthday
 
     def to_tuple(self) -> tuple:
+        """
+        Returns a tuple representation of the person object.
+
+        :return: A tuple of the form (id, firstName, lastName, email, birthday).
+        :rtype: tuple   
+        """
         return (self['id'], self['firstName'], self['lastName'], self['email'], self['birthday'])     
 
 
@@ -39,7 +68,7 @@ class Person(OrderedDict):
     def verify_firstName(self):
         """
         Verify that the 'firstName' attribute of the Person object is valid.
-
+        
         :raises Exception: If the 'firstName' attribute is missing or invalid.
         """
 
