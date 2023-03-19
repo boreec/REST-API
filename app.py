@@ -2,9 +2,19 @@ from PeopleDatabase import PeopleDatabase
 from flask import Flask
 
 app = Flask(__name__)
+"""
+Flask application instance. 
+"""
+
 db = PeopleDatabase()
+"""
+Database instance used by the application.  
+"""
 
 from routes import *
+"""
+Import the Flask routes from the routes 'module'.  
+"""
 
 if __name__ == "__main__":
     app.run()
