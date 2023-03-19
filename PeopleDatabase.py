@@ -116,6 +116,14 @@ class PeopleDatabase():
         return persons
 
     def update_person(self, person: Person):
+        """
+        Updates a person in the database. An Error is raised if
+        the update fails.
+
+        :param person: The person to update.
+        :type person: Person
+        :raises sqlite.Error
+        """
         sql_statement = """
                 UPDATE persons
                 SET firstname = ?,
