@@ -6,7 +6,7 @@ from routes import *
 
 class TestRoutesPOST(unittest.TestCase):
     """
-    A test class for the GET routes of the API.
+    A test class for the POST routes of the API.
     """
     
     def setUp(self):
