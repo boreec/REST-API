@@ -40,7 +40,11 @@ class PeopleDatabase():
     
     def create_person(self, person: Person):
         """
-            Insert a person information inside the 'persons' table. 
+        Inserts a new person into the database.
+
+        :param person: The person object to insert.
+        :type person: Person
+        :raises sqlite3.Error: If an error occurs while inserting the person into the database.
         """
         sql_statement = \
         """
