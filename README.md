@@ -87,6 +87,22 @@ $ curl http://localhost:5000/people/qsdqsdqoisudoiaze
 <p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
 ```
 
+The route GET `/people/:id/age` has a 200 response containing the age of the person on the current date, 
+or a 404 response if the person does not exist.
+
+For example (command ran on march 20th 2023):
+```terminal
+$ curl http://localhost:5000/people/bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de/age
+26
+
+$ curl http://localhost:5000/people/qsdqsdqoisudoiaze/age
+<!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+```
+
 ### Tests
 
 To make sure the API works in the way intended, many unit tests were written.
