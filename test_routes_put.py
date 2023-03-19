@@ -68,5 +68,16 @@ class TestRoutesPUT(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 400)
 
+    def test_update_person_with_firstName_set_to_invalid_format(self):
+        invalid_person = copy.deepcopy(self.person_data)
+        invalid_person.pop('id')
+        invalid_person['firstName'] = '!nv@lid'
+        response = self.client.put(
+            '/people/bf552a1c-fd73-4bd0-b64a-d3f69a9ff9de',
+            data=json.dumps(invalid_person),
+            content_type = 'application/json'
+        )
+        self.assertEqual(response.status_code, 400)
+        
 if __name__ == "__main__":
     unittest.main()
