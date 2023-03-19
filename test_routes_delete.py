@@ -6,7 +6,7 @@ from routes import *
 
 class TestRoutesDELETE(unittest.TestCase):
     """
-    A test case for the DELETE route of the API.
+    A test class for the DELETE routes of the API.
     """
     
     def setUp(self):
