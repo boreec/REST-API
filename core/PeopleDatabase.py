@@ -1,4 +1,4 @@
-from Person import Person
+from core.Person import Person
 import sqlite3
 from sqlite3 import Error
 from collections import OrderedDict
