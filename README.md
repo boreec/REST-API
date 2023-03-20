@@ -187,3 +187,23 @@ In order to execute them, run the following command.
 ```terminal
 python3 -m unittest discover -s tests
 ```
+
+### Documentation
+
+The classes and the functions are documented with docstrings. You can generate
+the documentation using the tools you like.
+
+For example with the package `pdoc`:
+
+```terminal
+pip install pdoc
+pdoc app.py ./core -o ./docs
+```
+
+```terminal
+firefox docs/index.html
+````
+
+### Credit
+
+Cyprien Borée ([website](https://boreec.fr/resume))
