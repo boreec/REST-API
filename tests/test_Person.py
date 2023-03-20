@@ -1,4 +1,4 @@
-from Person import Person
+from core.Person import Person
 import unittest
 
 class TestPerson(unittest.TestCase):

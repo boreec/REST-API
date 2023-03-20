@@ -1,7 +1,7 @@
 import unittest
 import json
 from app import app
-from routes import *
+from core.routes import *
 from datetime import date
 
 class TestRoutesGET(unittest.TestCase):

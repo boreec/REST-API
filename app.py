@@ -1,4 +1,4 @@
-from PeopleDatabase import PeopleDatabase
+from core.PeopleDatabase import PeopleDatabase
 from flask import Flask
 
 app = Flask(__name__)
@@ -11,7 +11,7 @@ db = PeopleDatabase()
 Database instance used by the application.  
 """
 
-from routes import *
+from core.routes import *
 """
 Import the Flask routes from the routes 'module'.  
 """

@@ -2,7 +2,7 @@ import unittest
 import json
 import copy
 from app import app
-from routes import *
+from core.routes import *
 
 class TestRoutesPOST(unittest.TestCase):
     """

@@ -1,5 +1,5 @@
-from PeopleDatabase import PeopleDatabase
-from Person import Person
+from core.PeopleDatabase import PeopleDatabase
+from core.Person import Person
 import unittest
 
 class TestPeopleDatabase(unittest.TestCase):
