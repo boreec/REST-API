@@ -18,7 +18,7 @@ def get_people():
     
     :param name: The name of the person(s) to retrieve.
     :type name: str
-    :returns: A JSON representation of the list of people.
+    :return: A JSON representation of the list of people.
     :rtype: str
     """
     
@@ -38,7 +38,7 @@ def get_person_by_id(id):
 
     :param id: The ID of the person.
     :type id: str
-    :returns: A JSON representation of the person.
+    :return: A JSON representation of the person.
     :rtype: str
     :raises 404: If the person with the specified ID is not found in the database.
     """
@@ -57,7 +57,7 @@ def get_person_age(id):
 
     :param id: The ID of the person.
     :type id: str
-    :returns: A JSON representation of the person's age.
+    :return: A JSON representation of the person's age.
     :rtype: str
     :raises 404: If the person with the specified ID is not found in the database.
     """
@@ -79,7 +79,7 @@ def create_person():
     """
     Creates a person inside the database.
 
-    :returns: a JSON response containing the person details.
+    :return: a JSON response containing the person details.
     :rtype: flask.Response
 
     :raises 400: If the request contains invalid data.
@@ -117,7 +117,7 @@ def update_person(id):
 
     :param id: The id of the person to be updated.
     :type id: str
-    :returns: A JSON response containing the updated person details.
+    :return: A JSON response containing the updated person details.
     :rtype: flask.Response
 
     :raises 404: If the person with the given id does not exist in the database.
