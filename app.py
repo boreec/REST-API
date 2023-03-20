@@ -14,6 +14,7 @@ Database instance used by the application.
 """
 
 from core.routes import *
+
 """
 Import the Flask routes from the routes 'module'.  
 """
