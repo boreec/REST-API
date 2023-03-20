@@ -1,3 +1,5 @@
+# Author: Cyprien Borée boreec@tuta.io
+
 from core.Person import Person
 import sqlite3
 from sqlite3 import Error

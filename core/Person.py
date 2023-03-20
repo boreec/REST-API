@@ -1,3 +1,5 @@
+# Author: Cyprien Borée boreec@tuta.io
+
 from collections import OrderedDict
 from datetime import datetime, date
 import json

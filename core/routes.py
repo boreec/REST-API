@@ -1,3 +1,5 @@
+# Author: Cyprien Borée boreec@tuta.io
+
 from datetime import date
 from flask import Response, abort, jsonify, request
 from app import app, db

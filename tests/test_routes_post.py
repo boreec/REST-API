@@ -1,3 +1,5 @@
+# Author: Cyprien Borée boreec@tuta.io
+
 import unittest
 import json
 import copy

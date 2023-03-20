@@ -1,3 +1,5 @@
+# Author: Cyprien Borée boreec@tuta.io
+
 from core.PeopleDatabase import PeopleDatabase
 from flask import Flask
 
